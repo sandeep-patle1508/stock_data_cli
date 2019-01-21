@@ -1,0 +1,3 @@
+module StockDataCli
+  # Your code goes here...
+end
