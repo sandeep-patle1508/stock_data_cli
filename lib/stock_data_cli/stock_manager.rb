@@ -1,23 +1,26 @@
 require './lib/quandl_api/client'
 require './lib/models/stock'
+require './lib/stock_data_cli/stock_helper'
 
 module StockDataCli
   class StockManager
+    include StockHelper
 
     def initialize(options)
       @quandl_client = QuandlApi::Client.new(options)
       @stocks = []
+      @sorted_stocks = []
     end
 
     def print_data
       response = @quandl_client.get_stock
       abort 'Unable to find data for this search' if response['dataset'].nil? || response['dataset'].empty?
-      parse_response(response)
 
-      puts @stocks.inspect
+      parse_response(response)
+      display_result
     end
 
-
+    private
     def parse_response(response)
       stocks = []
       column_names = response['dataset']['column_names']
@@ -27,17 +30,8 @@ module StockDataCli
         stock.set_drawdown
         @stocks << stock
       end
-    end
-
-    def associate_with_columns(columns, row)
-      data_hash = {}
-
-      columns.each_with_index do |c, i|
-        column_symbol = c.downcase.to_sym
-        data_hash[column_symbol] = row[i] if Stock::PERMITTED_ATTRS.include?(column_symbol)
-      end
-
-      data_hash
+      @stocks.reverse!
+      @sorted_stocks = @stocks.sort { |a, b|  a.drawdown <=> b.drawdown }
     end
   end
 end

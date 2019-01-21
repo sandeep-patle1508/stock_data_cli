@@ -13,4 +13,12 @@ class Stock
     difference = low - high
     @drawdown = ((difference/high)*100).round(1)
   end
+
+  def display_stock
+    puts "#{date}: Closed at #{close} (#{low} ~ #{high})"
+  end
+
+  def display_drawdown
+    "#{drawdown}% (#{high} on #{date} -> #{low} on #{date})"
+  end
 end
