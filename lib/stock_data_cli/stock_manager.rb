@@ -6,14 +6,15 @@ module StockDataCli
 
     def initialize(options)
       @quandl_client = QuandlApi::Client.new(options)
+      @stocks = []
     end
 
     def print_data
       response = @quandl_client.get_stock
       abort 'Unable to find data for this search' if response['dataset'].nil? || response['dataset'].empty?
-      data_hash = parse_response(response)
+      parse_response(response)
 
-      puts data_hash.inspect
+      puts @stocks.inspect
     end
 
 
@@ -22,10 +23,10 @@ module StockDataCli
       column_names = response['dataset']['column_names']
 
       response['dataset']['data'].each do |row|
-        stocks << Stock.new(associate_with_columns(column_names, row))
+        stock = Stock.new(associate_with_columns(column_names, row))
+        stock.set_drawdown
+        @stocks << stock
       end
-
-      stocks
     end
 
     def associate_with_columns(columns, row)
