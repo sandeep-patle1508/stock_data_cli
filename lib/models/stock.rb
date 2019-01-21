@@ -1,7 +1,7 @@
 class Stock
-  attr_accessor :date, :open, :high, :low, :close, :dividend, :drawdown
+  attr_accessor :date, :open, :high, :low, :close, :drawdown
 
-  PERMITTED_ATTRS = [:date, :open, :high, :low, :close, :dividend]
+  PERMITTED_ATTRS = [:date, :open, :high, :low, :close,]
 
   def initialize(data_hash)
     data_hash.each do |k,v|
@@ -14,11 +14,11 @@ class Stock
     @drawdown = ((difference/high)*100).round(1)
   end
 
-  def display_stock
-    puts "#{date}: Closed at #{close} (#{low} ~ #{high})"
+  def stock_string
+    "#{date}: Closed at #{close} (#{low} ~ #{high})"
   end
 
-  def display_drawdown
+  def drawdown_string
     "#{drawdown}% (#{high} on #{date} -> #{low} on #{date})"
   end
 end

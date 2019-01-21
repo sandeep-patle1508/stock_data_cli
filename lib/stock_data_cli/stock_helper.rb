@@ -1,4 +1,6 @@
 module StockHelper
+  # use API response column name to find the order of data
+  # only export/store required column
   def associate_with_columns(columns, row)
     data_hash = {}
 
@@ -10,8 +12,9 @@ module StockHelper
     data_hash
   end
 
+  # print result
   def display_result
-    @stocks.each { |stock| stock.display_stock }
+    @stocks.each { |stock| puts stock.stock_string }
     display_first_3_drawdown
     display_max_drawdown
     display_return(@stocks.first, @stocks.last)
@@ -19,11 +22,11 @@ module StockHelper
 
   def display_first_3_drawdown
     puts "\nFirst 3 Drawdowns:\n"
-    @sorted_stocks[0..3].each { |stock| puts stock.display_drawdown }
+    @sorted_stocks[0..3].each { |stock| puts stock.drawdown_string }
   end
 
   def display_max_drawdown
-    puts "\nMaximum drawdown: #{@sorted_stocks.first.display_drawdown}"
+    puts "\nMaximum drawdown: #{@sorted_stocks.first.drawdown_string}"
   end
 
   def display_return(first_stock, last_stock)
