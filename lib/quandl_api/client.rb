@@ -13,7 +13,7 @@ module QuandlApi
 		end
 
 		def get_stock
-			self.class.get(@stock_symbol, @options)
+			self.class.get("/#{@stock_symbol}", @options)
 		rescue HTTParty::Error => e
 			abort e.message
 		end
