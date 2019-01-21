@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'bitmap_editor'
+require 'stock_data_cli'
 
-describe StockDataApi::App do
+describe StockDataCli::App do
   let(:input_options) { Hash.new }
   
   subject { StockDataCli::App.new.run(input_options) }
