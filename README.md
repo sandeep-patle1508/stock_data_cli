@@ -53,7 +53,7 @@ Return: 2.740000000000009 [+1.6%] (172.26 on 02.01.18 -> 175.0 on 05.01.18)<br /
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rspec` to run the tests. 
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/test` to run the tests. 
 
 ## Tools
 * Ruby 2.5.1p57
