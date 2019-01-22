@@ -34,9 +34,11 @@ module StockDataCli
       response['dataset']['data'].each do |row|
         stock = Stock.new(associate_with_columns(column_names, row))
         stock.set_drawdown
-        @stocks << stock
+        
+        # API return sorted by date in descending order we need in asending order
+        @stocks.prepend(stock)
       end
-      @stocks.reverse!
+
       @sorted_stocks = @stocks.sort { |a, b|  a.drawdown <=> b.drawdown }
     end
   end

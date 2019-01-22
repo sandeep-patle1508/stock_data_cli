@@ -22,7 +22,7 @@ module StockHelper
 
   def display_first_3_drawdown
     puts "\nFirst 3 Drawdowns:\n"
-    @sorted_stocks[0..3].each { |stock| puts stock.drawdown_string }
+    @sorted_stocks[0..2].each { |stock| puts stock.drawdown_string }
   end
 
   def display_max_drawdown
