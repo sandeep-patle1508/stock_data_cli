@@ -4,6 +4,7 @@ require './lib/stock_data_cli/stock_helper'
 
 module StockDataCli
   class StockManager
+    attr_accessor :quandl_client, :stocks, :sorted_stocks
     include StockHelper
 
     # initialize QuandApi client

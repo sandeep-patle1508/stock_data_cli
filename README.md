@@ -59,3 +59,4 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 * Ruby 2.5.1p57
 * HTTParty Gem
 * Rspec
+* webmock
